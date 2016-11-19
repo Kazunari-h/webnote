@@ -6,7 +6,7 @@ wp core download --locale=ja --path=/var/www/html/webnote
 wp core config --dbname=$DBNAME --dbuser=$DBUSER --dbpass=$DBPASS --dbhost=$DBHOST --dbprefix=$DBPREFIX
 
 # インストール
-wp core install --url=$URL --title=$TITLE --admin_user=$NAME --admin_password=$PASSWORD --admin_email=$EMAIL
+wp core install --url=$WPURL --title=$WPTITLE --admin_user=$WPNAME --admin_password=$WPPASSWORD --admin_email=$WPEMAIL
 
 # プラグイン
 wp plugin install akismet
