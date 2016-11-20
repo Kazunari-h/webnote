@@ -1,6 +1,6 @@
 
 # ダウンロード
-wp core download --locale=ja --path=/var/www/html/webnote
+wp core download --locale=ja --path=/var/www/webnote
 
 # 設定 (環境変数で設定)
 wp core config --dbname=$DBNAME --dbuser=$DBUSER --dbpass=$DBPASS --dbhost=$DBHOST --dbprefix=$DBPREFIX
