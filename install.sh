@@ -2,40 +2,46 @@
 # ダウンロード
 wp core download --locale=ja --path=/var/www/webnote
 
-# 設定 (環境変数で設定)
+cd /var/www/webnote
+
+# 設定 (環境変数で設定 $DBNAME, $DBUSER, $DBPASS, $DBHOST, $DBPREFIX)
 wp core config --dbname=$DBNAME --dbuser=$DBUSER --dbpass=$DBPASS --dbhost=$DBHOST --dbprefix=$DBPREFIX
 
-# インストール
+# インストール(環境変数で設定 $WPURL, $WPTITLE, $WPNAME, $WPPASSWORD, $WPEMAIL)
 wp core install --url=$WPURL --title=$WPTITLE --admin_user=$WPNAME --admin_password=$WPPASSWORD --admin_email=$WPEMAIL
 
 # プラグイン
 wp plugin install akismet
-wp plugin install contact-form-7
-# font-awesome-4-menus
-wp plugin install lightbox-plus-colorbox
-wp plugin install page-transition
-wp plugin install wp-visual-icon-fonts
-wp plugin install wp-multibyte-patch
-wp plugin install crayon-syntax-highlighter
-wp plugin install jp-markdown
-wp plugin install wp-social-bookmarking-light
-wp plugin install tinymce-advanced
-# http://g-frontier.net/blog/bj-lazy-load/
-wp plugin install bj-lazy-load
+wp plugin install contact-form-7 --activate
+wp plugin install wp-multibyte-patch --activate
+wp plugin install crayon-syntax-highlighter --activate
+wp plugin install jp-markdown --activate
+wp plugin install wp-social-bookmarking-light --activate
+wp plugin install tinymce-advanced --activate
+wp plugin install bj-lazy-load --activate
 
 # テーマ作成
 wp plugin install one-click-child-theme
 
 # セキュリティ
-wp plugin install crazy-bone
+wp plugin install crazy-bone --activate
 wp plugin install limit-login-attempts
 
-# マーケ
-wp plugin install google-sitemap-generator
+# google系
+wp plugin install google-sitemap-generator --activate
 wp plugin install google-analytics-for-wordpress
-# wp plugin install custom-field-template
-# wp plugin install custom-post-type-permalinks
-# wp plugin install wordpress-importer
-# wp plugin install wp-mail-smtp
-# wp plugin install wp-sitemanager
-# wp plugin install wpx-nav-menus
+
+touch .htaccess
+
+cat << EOS > .htaccess
+<files wp-config.php>
+order allow,deny
+deny from all
+</files>
+EOS
+
+chmod 400 wp-config.php
+
+
+// テーマのインストール
+wp theme install habakiri --activate
