@@ -1,8 +1,12 @@
+# WP-CLIのインストール
+# http://qiita.com/IK12_info/items/4a9190119be2a0f347a0
+
+source .env
 
 # ダウンロード
-wp core download --locale=ja --path=/var/www/webnote
+wp core download --locale=ja --path=/var/www/$WPDIRECTORY
 
-cd /var/www/webnote
+cd /var/www/$WPDIRECTORY
 
 # 設定 (環境変数で設定 $DBNAME, $DBUSER, $DBPASS, $DBHOST, $DBPREFIX)
 wp core config --dbname=$DBNAME --dbuser=$DBUSER --dbpass=$DBPASS --dbhost=$DBHOST --dbprefix=$DBPREFIX
@@ -12,36 +16,29 @@ wp core install --url=$WPURL --title=$WPTITLE --admin_user=$WPNAME --admin_passw
 
 # プラグイン
 wp plugin install akismet
-wp plugin install contact-form-7 --activate
-wp plugin install wp-multibyte-patch --activate
-wp plugin install crayon-syntax-highlighter --activate
-wp plugin install jp-markdown --activate
-wp plugin install wp-social-bookmarking-light --activate
-wp plugin install tinymce-advanced --activate
-wp plugin install bj-lazy-load --activate
+wp plugin install contact-form-7
+wp plugin install wp-multibyte-patch
+wp plugin install crayon-syntax-highlighter
+wp plugin install jp-markdown
+wp plugin install wp-social-bookmarking-light
+wp plugin install tinymce-advanced
+wp plugin install bj-lazy-load
 
 # テーマ作成
 wp plugin install one-click-child-theme
 
 # セキュリティ
-wp plugin install crazy-bone --activate
+wp plugin install crazy-bone
 wp plugin install limit-login-attempts
 
 # google系
-wp plugin install google-sitemap-generator --activate
+wp plugin install google-sitemap-generator
 wp plugin install google-analytics-for-wordpress
 
-touch .htaccess
+source edit.sh
 
-cat << EOS > .htaccess
-<files wp-config.php>
-order allow,deny
-deny from all
-</files>
-EOS
-
-chmod 400 wp-config.php
+chmod 404 wp-config.php
 
 
 // テーマのインストール
-wp theme install habakiri --activate
+wp theme install habakiri
